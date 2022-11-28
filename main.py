@@ -290,8 +290,8 @@ with tab1: # === MSD QA COUNT ===
                 except Exception as e:
                     print(e)
 
-    with col2:
-        st.download_button('Download RAW', utils.convert_df(raw_dataset), file_name=f'RAW_MSD_{qa_proccess_type}_{start_date} to {end_date}.csv', mime='text/csv', key='raw')
+    # with col2:
+    #     st.download_button('Download RAW', utils.convert_df(raw_dataset), file_name=f'RAW_MSD_{qa_proccess_type}_{start_date} to {end_date}.csv', mime='text/csv', key='raw')
 
 
     # === DOWNLOAD SECTION ===
