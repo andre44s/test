@@ -449,12 +449,13 @@ with tab2: # === MSD Data File Processing ===
 
                     
                     start_time = datetime.datetime.now()
-                    img_files = asyncio.run(utils.get_img(files, batch_count))  # this is for running locally
                     print(1)
+                    img_files = asyncio.run(utils.get_img(files, batch_count))  # this is for running locally
+                    print(2)
                     result = Parallel(n_jobs=2, prefer='threads', verbose=10)(delayed(utils.extract_text)(i, reader) for i in img_files[0:])
                     st.text(datetime.datetime.now() - start_time)
                     logger.info(datetime.datetime.now() - start_time)
-                    print(1)
+                    print(3)
 
                     text_df['bounding_box'] = [i[0] for i in result]
                     text_df['extracted_text'] = [i[1] for i in result]
