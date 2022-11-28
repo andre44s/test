@@ -11,7 +11,6 @@ import streamlit as st
 import logging
 import collections
 
-@st.cache
 def setup_s3_client():
     client = boto3.client('s3',
                     aws_access_key_id = st.secrets["aws_access_key_id"],
@@ -114,7 +113,7 @@ def remove_punctuations(text):
 
     return text
 
-@st.cache
+
 def get_reader():
     reader = Reader(['en'])
 
