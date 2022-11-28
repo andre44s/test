@@ -115,7 +115,7 @@ def remove_punctuations(text):
 
 
 def get_reader():
-    reader = Reader(['en'])
+    reader = Reader(['en'], gpu=False)
 
     return reader
 
