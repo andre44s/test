@@ -121,6 +121,7 @@ def get_reader():
 
 
 def extract_text(img, reader):
+    st.text("Proc")
     result = ['Nothing']
     g, t, c = ['Nothing'], ['Nothing'], ['Nothing']
     try:
@@ -129,7 +130,8 @@ def extract_text(img, reader):
             g, t, c = extract_bb_text_confidence(result)
         else:
             raise Exception("empty result")
-    except:
+    except Exception as e:
+        st.text(e)
         pass
 
     return g, t, c
