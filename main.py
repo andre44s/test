@@ -452,7 +452,7 @@ with tab2: # === MSD Data File Processing ===
                     st.text(1)
                     img_files = asyncio.run(utils.get_img(files, batch_count))  # this is for running locally
                     st.text(2)
-                    result = Parallel(n_jobs=1, prefer='threads', verbose=10)(delayed(utils.extract_text)(i, reader) for i in img_files[0:])
+                    result = [utils.extract_text(i) for i in img_files]
                     st.text(datetime.datetime.now() - start_time)
                     logger.info(datetime.datetime.now() - start_time)
                     st.text(3)
