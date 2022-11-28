@@ -62,36 +62,36 @@ with tab1: # === MSD QA COUNT ===
     start_date = min([start_date_selector, end_date_selector])
     end_date = max([start_date_selector, end_date_selector])
 
-    # downloading the data for each day 
-    date_range = pd.date_range(start_date, end_date, freq='d')
-    read_fail = []
-    raw_dataset = pd.DataFrame()
-    for date in date_range:
-        if qa_proccess_type == "Regular Search":
-            origin_key = origin_prefix+str(date)[0:10]+'/000.csv'
-            print('Choosing Regular Search')
-        elif qa_proccess_type == "Text Search":
-            origin_key = origin_prefix+str(date)[0:10]+'/text-000.csv'
-            print('Choosing Text Search')
-        else:
-            origin_key = origin_prefix+str(date)[0:10]+'/000.csv'
-
-
-        try:
-            df = read_day(origin_key)
-            raw_dataset = raw_dataset.append(df, ignore_index = True)
-            print(f"{origin_key} success")
-        except:
-            st.warning(f"{origin_key} failed")
-            print(f"{origin_key} failed")
-            read_fail.extend(origin_key)
-
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         if st.button('Process', key='process'):
             with st.spinner('Loading Files'):
                 # load file from s3 
+
+                # downloading the data for each day 
+                date_range = pd.date_range(start_date, end_date, freq='d')
+                read_fail = []
+                raw_dataset = pd.DataFrame()
+                for date in date_range:
+                    if qa_proccess_type == "Regular Search":
+                        origin_key = origin_prefix+str(date)[0:10]+'/000.csv'
+                        print('Choosing Regular Search')
+                    elif qa_proccess_type == "Text Search":
+                        origin_key = origin_prefix+str(date)[0:10]+'/text-000.csv'
+                        print('Choosing Text Search')
+                    else:
+                        origin_key = origin_prefix+str(date)[0:10]+'/000.csv'
+
+
+                    try:
+                        df = read_day(origin_key)
+                        raw_dataset = raw_dataset.append(df, ignore_index = True)
+                        print(f"{origin_key} success")
+                    except:
+                        st.warning(f"{origin_key} failed")
+                        print(f"{origin_key} failed")
+                        read_fail.extend(origin_key)
 
                 destination_file = destination_prefix + 'processed_file_id.csv'
                 obj = client.get_object(Bucket=destination_bucket, Key=destination_file)
