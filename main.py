@@ -21,6 +21,7 @@ destination_prefix = st.secrets["destination_prefix"]
 destination_file = destination_prefix + 'processed_file_id.csv'
 
 client = utils.setup_s3_client()
+reader = utils.get_reader()
 
 @st.cache
 def read_day(origin_key):
@@ -446,7 +447,7 @@ with tab2: # === MSD Data File Processing ===
                     logger.info("OCR set length : " + str(len(files)))
 
 
-                    reader = utils.get_reader()
+                    
                     start_time = datetime.datetime.now()
                     img_files = asyncio.run(utils.get_img(files, batch_count))  # this is for running locally
                     print(1)
