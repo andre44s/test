@@ -21,7 +21,7 @@ destination_prefix = st.secrets["destination_prefix"]
 destination_file = destination_prefix + 'processed_file_id.csv'
 
 client = utils.setup_s3_client()
-reader = utils.get_reader()
+reader = utils.get_reader(False)
 
 @st.cache
 def read_day(origin_key):

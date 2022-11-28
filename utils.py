@@ -114,8 +114,9 @@ def remove_punctuations(text):
     return text
 
 
-def get_reader():
-    reader = Reader(['en'], gpu=False)
+@st.cache
+def get_reader(gpu_mode):
+    reader = Reader(['en'], gpu=gpu_mode)
 
     return reader
 
