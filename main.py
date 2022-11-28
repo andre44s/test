@@ -21,7 +21,6 @@ destination_prefix = st.secrets["destination_prefix"]
 destination_file = destination_prefix + 'processed_file_id.csv'
 
 client = utils.setup_s3_client()
-reader = utils.get_reader(False)
 
 @st.cache
 def read_day(origin_key):
@@ -446,7 +445,7 @@ with tab2: # === MSD Data File Processing ===
                     st.text("OCR set length : " + str(len(files)))
                     logger.info("OCR set length : " + str(len(files)))
 
-
+                    reader = utils.get_reader(False)
                     
                     start_time = datetime.datetime.now()
                     st.text(1)
