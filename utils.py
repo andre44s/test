@@ -10,6 +10,7 @@ import string
 import streamlit as st
 import logging
 import collections
+import psutil
 
 def setup_s3_client():
     client = boto3.client('s3',
@@ -115,11 +116,15 @@ def remove_punctuations(text):
 
 @st.cache
 def get_reader(gpu_mode):
+    st.text(str(psutil.virtual_memory()[0]/1000000000))
+    st.text(str(psutil.virtual_memory()[3]/1000000000))
     return Reader(['en'], gpu=gpu_mode)
 
 
 def extract_text(img, reader):
     st.text("Proc")
+    st.text(str(psutil.virtual_memory()[0]/1000000000))
+    st.text(str(psutil.virtual_memory()[3]/1000000000))
     result = ['Nothing']
     g, t, c = ['Nothing'], ['Nothing'], ['Nothing']
     try:
