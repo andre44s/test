@@ -441,7 +441,7 @@ with tab2: # === MSD Data File Processing ===
                     text_df = combined[(~combined['request_id'].isin(positive_set_requests))]
                     text_df = text_df[['request_id', 'extras.subject', 'extras.searchImageUrl']].drop_duplicates().reset_index(drop=True)
 
-                    files = text_df['extras.searchImageUrl'].values
+                    files = text_df['extras.searchImageUrl'].values[:50]
                     batch_count = 10
                     st.text("OCR set length : " + str(len(files)))
                     logger.info("OCR set length : " + str(len(files)))
