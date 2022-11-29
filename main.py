@@ -2,12 +2,11 @@ import streamlit as st
 from easyocr import Reader
 import requests
 
-image_url = st.file_uploader("Image URL")
+input_csv = st.file_uploader("Choose File", type="csv", accept_multiple_files=False, key=None, help=None)
 
-reader = Reader(['id'], gpu=False)
-
-if image_url != None:
-    image_link = image_url["imageUrl"]
+if input_csv != None:
+    reader = Reader(['id'], gpu=False)
+    image_link = input_csv["imageUrl"]
     o = 0
     for i in image_link:
         response = requests.get(i)
