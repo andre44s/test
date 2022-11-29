@@ -7,10 +7,11 @@ input_csv = st.file_uploader("Choose File", type="csv", accept_multiple_files=Fa
 
 if input_csv != None:
     reader = Reader(['id'], gpu=False)
-    image_link = input_csv[["imageUrl"]].values
+    image_csv = pd.read_csv(input_csv)
+    image_link = image_csv[["imageUrl"]].values
     o = 0
     for i in image_link:
-        response = requests.get(i)
+        response = requests.get(i[0])
         text = reader.readtext(response.content, detail=1)
         st.text(text)
         o += 1
